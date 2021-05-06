@@ -1,0 +1,58 @@
+@startuml
+class Vertex {
+   -id : Int
+   -info : Object
+   color : String 
+   +<<create>>constr(id : Int, info : Object, color : String)
+   +toString() : String
+}
+
+abstract class Edge {
+   -id : Int
+   -color : String 
+   -ends: Vertex[2]
+   +toString() : String
+   +<<create>>constr(id: Int, color: String)
+}
+
+
+class DirectedEdge{
+   -source : Int
+   +<<create>>constr(source : Int, id: Int, color: String)
+   +getSource() : Vertex
+   +getSink() : Vertex
+   +toString() : String
+
+}
+
+class UndirectedEdge{
+   +getEnds() : Vertex[]
+   +toString() : String
+    +<<create>>constr(id: Int, color: String)  
+}
+
+
+interface Graph { 
+   +nbOfVertices() : Int
+   +nbOfEdges() : Int
+   +addVertex(v : Vertex)
+   +addEdge(Vertex, Vertex, EdgeKind)
+   +isConnected(Vertex, Vertex): boolean
+   +isConnected() : boolean
+   +getEdges(Vertex, Vertex) :Edge[]
+   +getEdges() : Edge[]
+   +getVertices(): Vertex[]
+   +getNeighborEdges(Vertex) : Edge[]
+   +<<create>>constr()
+}
+
+
+
+
+
+Graph ..> Edge
+Graph ..> Vertex
+Edge <|-- DirectedEdge
+Edge <|-- UndirectedEdge
+
+@enduml
